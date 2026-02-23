@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tg-channel-bot
+  labels:
+    app: tg-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tg-bot
+  template:
+    metadata:
+      labels:
+        app: tg-bot
+    spec:
+      containers:
+      - name: bot
+        image: baxmut/tg-3d-bot:v1 
+        env:
+          - name: BOT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: bot-secrets
+                key: BOT_TOKEN
+          - name: ADMIN_ID
+            valueFrom:
+              secretKeyRef:
+                name: bot-secrets
+                key: ADMIN_ID
+          - name: CHANNEL_ID
+            valueFrom:
+              secretKeyRef:
+                name: bot-secrets
+                key: CHANNEL_ID
