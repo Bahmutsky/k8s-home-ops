@@ -17,4 +17,5 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true # ArgoCD сам создаст namespace monitoring
+      - CreateNamespace=true 
+      - ServerSideApply=true
